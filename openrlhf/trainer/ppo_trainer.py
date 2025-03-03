@@ -238,7 +238,7 @@ class PPOTrainer(ABC):
                         output = self.tokenizer.batch_decode(
                             experience.sequences[0].unsqueeze(0), skip_special_tokens=True
                         )
-                        self.strategy.print(output)
+                        # self.strategy.print(output)
                     self.replay_buffer.append(experience)
 
                 if self.args.advantage_estimator != "group_norm":
