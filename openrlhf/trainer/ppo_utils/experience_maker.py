@@ -353,9 +353,10 @@ class NaiveExperienceMaker(ABC):
             if self.custom_reward_func:
                 print('Inspect - \n')
                 print(inspect.getsource(self.custom_reward_func))
-                r = self.custom_reward_func.reward_func(queries, samples.prompts, samples.labels).to(
+                r = self.custom_reward_func(queries, samples.prompts, samples.labels).to(
                     device=action_log_probs.device
                 )
+                print(f'Rewards - {r}')
             else:
                 print('remote !!!')
                 r = remote_rm_fn(
