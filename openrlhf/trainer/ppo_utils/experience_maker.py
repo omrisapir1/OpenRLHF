@@ -352,7 +352,7 @@ class NaiveExperienceMaker(ABC):
             print(f'CUSTOM {self.remote_rm_url}')
             if self.custom_reward_func:
                 print('Inspect - \n')
-                print(inspect(self.custom_reward_func.reward_func))
+                print(inspect.getsource(self.custom_reward_func))
                 r = self.custom_reward_func.reward_func(queries, samples.prompts, samples.labels).to(
                     device=action_log_probs.device
                 )
