@@ -17,7 +17,7 @@ def reward_func(queries, prompts, labels):
         cur_i = 0
 
     try:
-        json.dump(list(zip(queries, labels)),open(f'{PATH}/{cur_i}_{time.time()}.json','w'))
+        json.dump(list(zip(queries, [t.item() for t in labels])),open(f'{PATH}/{cur_i}_{time.time()}.json','w'))
         print(f'queries: {queries}\nlabels: {labels}')
         print(list(zip(queries, labels)))
     except:
@@ -44,6 +44,4 @@ def reward_math_func(answer, numerical_solution):
     extracted_answer = extract_numerical_answer(answer)
     if not extracted_answer:
         return 0
-    print(extracted_answer)
-    print('Numerical: ' + numerical_solution)
     return int(float(numerical_solution) == float(extracted_answer))
