@@ -65,15 +65,15 @@ def split_experience_batch(experience: Experience) -> List[BufferItem]:
             batch_kwargs[i][key] = v
 
     for i in range(batch_size):
-        batch_kwargs[i]["dataset_info.json"] = {}
+        batch_kwargs[i]["info"] = {}
     for k, v in experience.info.items():
         vals = torch.unbind(v)
         assert batch_size == len(vals)
         for i, vv in enumerate(vals):
             if isinstance(vv, torch.Tensor):
-                assert vv.numel() == 1, f"dataset_info.json[{k}] must be a scalar tensor, but got {vv.shape}"
+                assert vv.numel() == 1, f"info[{k}] must be a scalar tensor, but got {vv.shape}"
                 vv = vv.item()
-            batch_kwargs[i]["dataset_info.json"][k] = vv
+            batch_kwargs[i]["info"][k] = vv
 
     items = [BufferItem(**kwargs) for kwargs in batch_kwargs]
     return items
