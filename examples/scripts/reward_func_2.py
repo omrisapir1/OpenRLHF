@@ -15,9 +15,13 @@ def reward_func(queries, prompts, labels):
     else:
         os.mkdir(PATH)
         cur_i = 0
+
     try:
         json.dump(list(zip(queries, labels)),open(f'{PATH}/{cur_i}_{time.time()}.json','w'))
+        print(f'queries: {queries}\nlabels: {labels}')
+        print(list(zip(queries, labels)))
     except:
+        print('ERROR')
         print(f'queries: {queries}\nlabels: {labels}')
         print(list(zip(queries, labels)))
     # queries is prompts + responses
