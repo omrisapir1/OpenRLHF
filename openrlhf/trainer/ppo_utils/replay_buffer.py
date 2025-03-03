@@ -110,10 +110,10 @@ def make_experience_batch(items: List[BufferItem], packing_samples=False) -> Exp
             batch_data = vals if vals[0] is not None else None
         kwargs[key] = batch_data
 
-    kwargs["dataset_info.json"] = {}
+    kwargs["info"] = {}
     for key in items[0].info.keys():
         vals = torch.tensor([item.info[key] for item in items])
-        kwargs["dataset_info.json"][key] = vals
+        kwargs["info"][key] = vals
     return Experience(**kwargs)
 
 
