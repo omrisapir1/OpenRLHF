@@ -170,7 +170,7 @@ class NaiveExperienceMaker(ABC):
             reward_module = importlib.util.module_from_spec(spec)
             spec.loader.exec_module(reward_module)
             self.custom_reward_func = reward_module.reward_func
-            print(f"Loading custom --- {spec} {reward_module} {self.custom_reward_func}")
+
 
     # tokenizer
     def tokenize_fn(self, texts, max_length, padding=True, device=None):
@@ -345,15 +345,15 @@ class NaiveExperienceMaker(ABC):
             value = None
 
         # rewards
-        print(f'REMOTE {self.remote_rm_url}')
+
         if self.remote_rm_url is not None:
             # remote RM
             queries = self.tokenizer.batch_decode(sequences.cpu(), skip_special_tokens=False)
-            print(f'CUSTOM {self.remote_rm_url}')
+
             if self.custom_reward_func:
                 print('Inspect - \n')
                 print(inspect.getsource(self.custom_reward_func))
-                r = self.custom_reward_func(queries, samples.prompts, samples.labels).to(
+                r = self.custom_reward_func(queries, samples.prompts, samples.label).to(
                     device=action_log_probs.device
                 )
                 print(f'Rewards - {r}')
