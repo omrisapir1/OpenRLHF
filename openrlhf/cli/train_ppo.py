@@ -256,7 +256,7 @@ def train(args):
         ptx_coef=args.ptx_coef,
         max_norm=args.max_norm,
         # fro GPT generation
-        do_sample=True,
+        do_sample=False,
         max_new_tokens=args.generate_max_len,
         max_length=args.max_len,
         temperature=args.temperature,
