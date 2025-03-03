@@ -27,6 +27,6 @@ def extract_numerical_answer(answer):
 
 def reward_math_func(answer, numerical_solution):
     extracted_answer = extract_numerical_answer(answer)
-    if extracted_answer is None:
+    if not extracted_answer:
         return 0
     return int(float(numerical_solution) == float(extracted_answer))
