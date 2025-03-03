@@ -170,7 +170,7 @@ class RewardModelTrainer(ABC):
                 acc = (chosen_reward > reject_reward).float().mean().item()
                 acc_sum += acc
                 loss_sum += preference_loss.item()
-                # optional rm info
+                # optional rm dataset_info.json
                 logs_dict = {
                     "loss": preference_loss.item(),
                     "acc": acc,

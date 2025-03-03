@@ -261,7 +261,7 @@ class NaiveExperienceMaker(ABC):
             else:
                 raise Exception(f"Unkown advantage_estimator {self.advantage_estimator}")
 
-            # calculate the return info.
+            # calculate the return dataset_info.json.
             if not getattr(self, "packing_samples", False):
                 return_sums = reward.sum(dim=-1)
             else:
@@ -269,7 +269,7 @@ class NaiveExperienceMaker(ABC):
                     [each_reward.sum() for each_reward in reward], device=torch.cuda.current_device()
                 )
             experience.info["return"] = return_sums
-            # remove unnecessary info
+            # remove unnecessary dataset_info.json
             experience.kl = None
             del experience.info["num_actions"]
             experience.to_device("cpu")

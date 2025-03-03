@@ -126,4 +126,4 @@ if __name__ == "__main__":
         logger.info(f"Sent JSON: {result}")
         return JSONResponse(result)
 
-    uvicorn.run(app, host=args.host, port=args.port, log_level="info")
+    uvicorn.run(app, host=args.host, port=args.port, log_level="dataset_info.json")

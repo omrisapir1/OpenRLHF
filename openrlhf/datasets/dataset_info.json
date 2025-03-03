@@ -1,0 +1,22 @@
+{
+    "description": "A dataset of math problems with labels.",
+    "features": {
+        "context_messages": {
+            "dtype": "string",
+            "id": null
+        },
+        "label": {
+            "dtype": "float32",
+            "id": null
+        }
+    },
+    "splits": {
+        "train": {
+            "name": "train",
+            "num_bytes": 0,
+            "num_examples": 0
+        }
+    },
+    "download_checksums": {},
+    "license": "MIT"
+}
