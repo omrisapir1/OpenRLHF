@@ -168,6 +168,7 @@ class NaiveExperienceMaker(ABC):
             reward_module = importlib.util.module_from_spec(spec)
             spec.loader.exec_module(reward_module)
             self.custom_reward_func = reward_module.reward_func
+            print(f"Loading custom --- {spec} {reward_module} {self.custom_reward_func}")
 
     # tokenizer
     def tokenize_fn(self, texts, max_length, padding=True, device=None):
