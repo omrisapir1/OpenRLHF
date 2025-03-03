@@ -1,3 +1,5 @@
+import inspect
+
 import time
 from abc import ABC
 from copy import deepcopy
@@ -343,14 +345,19 @@ class NaiveExperienceMaker(ABC):
             value = None
 
         # rewards
+        print(f'REMOTE {self.remote_rm_url}')
         if self.remote_rm_url is not None:
             # remote RM
             queries = self.tokenizer.batch_decode(sequences.cpu(), skip_special_tokens=False)
+            print(f'CUSTOM {self.remote_rm_url}')
             if self.custom_reward_func:
+                print('Inspect - \n')
+                print(inspect(self.custom_reward_func))
                 r = self.custom_reward_func(queries, samples.prompts, samples.labels).to(
                     device=action_log_probs.device
                 )
             else:
+                print('remote !!!')
                 r = remote_rm_fn(
                     self.remote_rm_url, queries=queries, prompts=samples.prompts, labels=samples.labels
                 ).to(device=action_log_probs.device)
