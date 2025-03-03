@@ -351,9 +351,9 @@ class NaiveExperienceMaker(ABC):
             queries = self.tokenizer.batch_decode(sequences.cpu(), skip_special_tokens=False)
 
             if self.custom_reward_func:
-                print('Inspect - \n')
-                print(inspect.getsource(self.custom_reward_func))
-                r = self.custom_reward_func(queries, samples.prompts, samples.label).to(
+                print('Samples - \n')
+                print(samples)
+                r = self.custom_reward_func(queries, samples.prompts, samples.labels).to(
                     device=action_log_probs.device
                 )
                 print(f'Rewards - {r}')
