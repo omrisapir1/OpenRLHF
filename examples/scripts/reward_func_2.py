@@ -32,4 +32,6 @@ def reward_math_func(answer, numerical_solution):
     extracted_answer = extract_numerical_answer(answer)
     if not extracted_answer:
         return 0
+    print(extracted_answer)
+    print('Numerical: ' + numerical_solution)
     return int(float(numerical_solution) == float(extracted_answer))
