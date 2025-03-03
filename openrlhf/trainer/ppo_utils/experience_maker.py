@@ -219,6 +219,8 @@ class NaiveExperienceMaker(ABC):
                     samples_list, src=self.strategy.ring_attn_ranks[0], group=self.strategy.ring_attn_group
                 )
         else:
+            print(f'All prompts: {all_prompts}')
+            print(f'All prompts: {all_labels}')
             samples_list = self.generate_samples(all_prompts, all_labels, **generate_kwargs)
         torch.distributed.barrier()
 
@@ -351,14 +353,13 @@ class NaiveExperienceMaker(ABC):
             queries = self.tokenizer.batch_decode(sequences.cpu(), skip_special_tokens=False)
 
             if self.custom_reward_func:
-                print('Samples - \n')
-                print(samples)
+
                 r = self.custom_reward_func(queries, samples.prompts, samples.labels).to(
                     device=action_log_probs.device
                 )
-                print(f'Rewards - {r}')
+
             else:
-                print('remote !!!')
+
                 r = remote_rm_fn(
                     self.remote_rm_url, queries=queries, prompts=samples.prompts, labels=samples.labels
                 ).to(device=action_log_probs.device)
