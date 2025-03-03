@@ -230,6 +230,8 @@ class PPOTrainer(ABC):
             )
 
             for rand_prompts, labels in self.prompts_dataloader:
+                print(f'rand_prompts: {rand_prompts}')
+                print(f'labels: {labels}')
                 for i, experience in enumerate(
                     self.experience_maker.make_experience_list(rand_prompts, labels, **self.generate_kwargs)
                 ):
