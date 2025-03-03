@@ -295,7 +295,7 @@ class NaiveExperienceMaker(ABC):
             prompts = all_prompts[i : i + args.micro_rollout_batch_size]
             labels = all_labels[i : i + args.micro_rollout_batch_size]
             inputs = self.tokenize_fn(prompts, self.prompt_max_len, device="cuda")
-            print(f'INPuTS {inputs}')
+            # print(f'INPuTS {inputs}')
             print(f'generate_kwargs {generate_kwargs}')
             sequences, attention_mask, action_mask = self.actor.generate(**inputs, **generate_kwargs)
             samples = Samples(
