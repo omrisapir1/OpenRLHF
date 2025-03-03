@@ -869,7 +869,7 @@ class RemoteExperienceMaker(NaiveExperienceMaker):
                         total_length=attention_mask.float().sum(dim=-1),
                         prompts=prompts,
                         labels=labels,
-                        pad_len=None,
+                        pad_len=max_input_len,
                     )
                 )
             else:
