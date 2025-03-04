@@ -4,6 +4,7 @@ import json
 import os
 import time
 
+
 PATH = '/kaggle/working/OpenRLHF/batch_solution'
 def reward_func(queries, prompts, labels):
     if os.path.exists(PATH):
