@@ -14,7 +14,10 @@ def reward_func(queries, prompts, labels):
         except:
             cur_i = 0
     else:
-        os.mkdir(PATH)
+        try:
+            os.mkdir(PATH)
+        except:
+            pass
         cur_i = 0
 
     json.dump(list(zip(queries, [t.item() for t in labels])),open(f'{PATH}/{cur_i}_{time.time()}.json','w'))
